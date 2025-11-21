@@ -67,7 +67,7 @@ This stage ensures that both tables have consistent IDs, matching rows, correct 
 
 ## **Findings**
 
-Before getting into the details, this section highlights only a selection of the findings from each variable group. The full exploratory work including every graph, summary table, and distribution check is documented separately, and can be viewed in the file [**findings**](https://www.notion.so/JFK-Data-Analysis-Phase-1-full-2b0434ba33238026a32fe02c1c6c1e98?pvs=21)
+Before getting into the details, this section highlights only a selection of the findings from each variable group. The full exploratory work including every graph, summary table, and distribution check is documented separately, and can be viewed in the file [**findings**](images)
 
 ### **Weather Variables**
 
