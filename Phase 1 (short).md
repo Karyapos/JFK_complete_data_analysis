@@ -6,40 +6,44 @@ This document briefly introduces the initial phase of work on the [JFK Airport d
 
 **What factors most strongly affect taxi‑out times, and how?**
 
-It contains the basic transformations, exploratory findings, and the issues raised and clarified during the first follow‑up meeting with the customer.  All analyses and transformations in this stage were performed in **SQL**.
+This section covers basic transformations, exploratory findings, and clarifications from the first follow‑up meeting, including handling outliers, missing values, wrong labels, address issues.  All analyses and transformations in this stage were performed in **SQL**.
 
 ## Data Transformation
 
-The original dataset contained **23 columns**, many of which were not ideal for direct analysis. After transformation, the working structure became:
+The original dataset contained **23 columns**, many of which were not ideal for direct analysis. After transformation, the **airport_data** became:
 
 1. **id** – added as a unique identifier for programming safety
-2. **date** – (MONTH, DAY_OF_MONTH, DAY_OF_WEEK)
-3. **air_carrier** – (OP_UNIQUE_CARRIER)
+2. **timestamp** – (MONTH, DAY_OF_MONTH,crs_dep_m)
+3. **carrier** – (OP_UNIQUE_CARRIER)
 4. **flight_code** – (TAIL_NUM)
 5. **destination** – (DEST)
-6. **distance** – (DISTANCE)
-7. **dep_traffic** – (sch_arr)
-8. **arr_traffic** – (sch_dep)
-9. **taxi_out** – (TAXI_OUT)
+6. **dep_delay** – (dep_delay)
+7. **distance** – (DISTANCE)
+8. **departures** – (sch_arr)
+9. **arrivals** – (sch_dep)
+10. **taxi_out** – (TAXI_OUT)
+11. **taxi_10tile** (10 tiled taxi_out variable for easier **Power BI** later use)
 
-The database also included pre‑taxi‑out details such as scheduled vs. actual departure and arrival times. These were confirmed not to be relevant for analysis at this stage.
+The database also included pre‑taxi‑out details such as scheduled vs. actual departure and arrival times. These were confirmed not to be relevant for analysis at this stage.However, I included **dep_delay** just to privately examine that also.
 
-A separate section was created for **weather‑related variables**, even though initial graphs suggested limited impact on taxi‑out times:
+A separate section was created for **weather_data**:
 
 1. **id**
-2. **temperature** (Temperature)
-3. **dew_point** (Dew Point)
-4. **humidity** (Humidity)
-5. **wind** (Wind)
-6. **wind_speed** (Wind Speed)
-7. **wind_gust** (Wind Gust)
-8. **pressure** (Pressure)
-9. **condition** (Condition)
-10. **taxi_out** (TAXI_OUT)
+2. **timestamp** – (MONTH, DAY_OF_MONTH,crs_dep_m)
+3. **temperature** (Temperature)
+4. **dew_point** (Dew Point)
+5. **humidity** (Humidity)
+6. **wind** (Wind)
+7. **wind_speed** (Wind Speed)
+8. **wind_gust** (Wind Gust)
+9. **pressure** (Pressure)
+10. **condition** (Condition)
+11. **taxi_out** (TAXI_OUT)
+12. **taxi_10tile** 
 
 ## Findings
 
-This section highlights only a selection of the findings. The full exploratory work including every graph, summary table, and distribution check is documented separately, and can be viewed in the file [**findings**](images)
+A selection of the SQL scripts used for data preparation and exploratory checks (e.g., handling missing values, outlier detection, and variable transformations) is included in the file [**SQL_scripts**](SQL_scripts). These provide core steps behind the findings(images).
 
 ### Weather Variables
 
