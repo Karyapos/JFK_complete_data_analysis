@@ -1,11 +1,11 @@
 # JFK Data Analysis - Phase 1 (full)
-## **Project Context**
+## Project Context
 
 This README documents the **first phase** of analysis on the [JFK Airport dataset](https://www.kaggle.com/datasets/deepankurk/flight-take-off-data-jfk-airport/data).
 
 This file contains data about flights leaving from JFK airport between Nov 2019-Dec-2020, along with weather conditions, operational metadata, and multiple scheduled/actual timestamps.
 
-The purpose of this phase was to perform **basic cleaning**, **clarify confusing fields**, and run **initial exploratory analysis** to understand which factors appear to influence **taxi-out times**. At this stage, the work is not about modeling or prediction yet , it is strictly about understanding structure, identifying inconsistencies, and preparing clean, reliable inputs for the deeper analysis that will follow.
+The purpose of this phase was to perform **basic cleaning**, **clarify confusing fields**, and run **initial exploratory analysis** to understand which factors appear to influence **taxi-out times**. At this stage, the work is not about modeling or prediction yet, it is strictly about understanding structure, identifying inconsistencies, and preparing clean, reliable inputs for the deeper analysis that will follow.
 
 The guiding question for this part of the project remains:
 
@@ -16,9 +16,9 @@ Before even the meeting, a few issues (such as the dew point problem) were alrea
 
 It’s also worth noting that this entire phase was completed using **SQL** only. 
 
-## **Data Transformation**
+## Data Transformation
 
-The original dataset contained a large number **23 columns** . Many of these fields were timestamps, raw operational fields, string-encoded numbers, or columns that were irrelevant for early analysis.
+The original dataset contained a large number of **23 columns** . Many of these fields were timestamps, raw operational fields, string-encoded numbers, or columns that were irrelevant for early analysis.
 
 The transformation had two goals:
 
@@ -27,14 +27,14 @@ The transformation had two goals:
 
 During the meeting, several columns were explicitly approved to be removed from this phase.
 
-### **Excluded Columns**
+### Excluded Columns
 
 1. crs_elapsed_time
 2. crs_dep_m
 3. dep_time_m
 4. crs_arrival_m
 
-### **Airport related Table**
+### Airport-related Table
 
 This table contains the core operational fields that describe each individual flight together with the immediate airport context around it. It combines the flight-specific identifiers with day-level temporal information and the airport traffic variables
 
@@ -48,7 +48,7 @@ This table contains the core operational fields that describe each individual fl
 8. arr_traffic (sch_dep)
 9. taxi_out (TAXI_OUT)
 
-### **Weather  related Table**
+### Weather-related Table
 
 All weather-related data is placed in a separate structure. These variables were initially suspected to have meaningful impact on taxi-out performance (based on common findings in aviation research), but this has to be verified.
 
@@ -65,20 +65,20 @@ All weather-related data is placed in a separate structure. These variables were
 
 This stage ensures that both tables have consistent IDs, matching rows, correct numeric formats, and clean join relationships.
 
-## **Findings**
+## Findings
 
-Before getting into the details, this section highlights only a selection of the findings from each variable group. The full exploratory work including every graph, summary table, and distribution check is documented separately, and can be viewed in the file [**findings**](images)
+This section highlights only a selection of the findings from each variable group. The full exploratory work including every graph, summary table, and distribution check is documented separately, and can be viewed in the file [**images**](images).  In addition, the [**SQL_scripts**](SQL_scripts) folder contains representative queries used during data cleaning and transformation.
 
-### **Weather Variables**
+### Weather Variables
 
 Weather initially looked like it would be a major driver. Many sources claim that wind, rain, visibility, and pressure conditions at major airports are among the main contributors to delays.
 
-However, the analysis in this early phase found that **weather had surprisingly limited impact** on taxi-out time.
+However, the analysis in this early phase found that weather had surprisingly limited impact on taxi-out time.
 
 Examples:
 
 - Average temperature was ~ 2 degrees lower in flights with better taxi‑out performance (<15 minutes) compared to delayed ones (>35 minutes).
-- Humidity, pressure,dew point and general condition categories were flat.
+- Humidity, pressure, dew point and general condition categories were flat.
 - Only **wind** had a mild effect:
     
     higher wind speeds and stronger gusts were associated with slightly higher taxi-out times, but the differences were still too small to consider them a core driver.
@@ -86,9 +86,9 @@ Examples:
 
 This will be revisited in later modeling, but for now, weather does not appear to be a dominant factor.
 
-### **Day of Week**
+### Day of Week
 
-Day of the week do show a more pronounced effect.
+Days of the week do show a more pronounced effect.
 
 Example comparisons:
 
@@ -107,7 +107,7 @@ Example comparisons:
 
 These differences suggest traffic patterns and scheduling density influence congestion.
 
-### **Air Carrier**
+### Air Carrier
 
 Carrier differences are the most dramatic and consistent:
 
@@ -152,9 +152,9 @@ The **destination** variable shows several notable instabilities:
 
 These variations highlight that different destinations behave very differently in terms of taxi-out performance, suggesting that  runway related procedures may play a larger role than expected.
 
-### **Distance**
+### Distance
 
-Distance have a clear pattern:
+Distance has a clear pattern:
 
 | AVG Distance | AVG Taxi-Out (min) |
 | --- | --- |
@@ -164,7 +164,7 @@ Distance have a clear pattern:
 | 1365.05 | 39.44 |
 | 1406.99 | 39.95 |
 
-The increase is not linear but shows that longer-distance flights often correspond to longer taxi-out times.This was likely due to runway assignment priorities, where long‑haul flights were given different sequencing that increased taxi duration.
+The increase is not linear but shows that longer-distance flights often correspond to longer taxi-out times.This was likely due to runway assignment priorities, where long‑haul flights were given different sequencing which increased taxi duration.
 
 ### Airport Traffic
 
@@ -180,11 +180,28 @@ Airport traffic was initially expected to be one of the strongest drivers of tax
 
 Departures had a stronger influence than arrivals, reinforcing that outbound congestion was the primary driver of extended taxi‑out times.
 
-## **Follow-Up Questions and Clarification**
+## Outliers control
+
+| Variable | Lower outlier | Upper outlier |
+| --- | --- | --- |
+| taxi_out | 5 | 41 |
+| distance | 94 | 4983 |
+| sch_dep | 0 | 55 |
+| sch_arr | 0 | 46 |
+| temperature | 17 | 68 |
+| dew_point | -3 | 67 |
+| humidity | 0 | 97 |
+| wind_speed | 0 | 36 |
+| wind_gust | 0 | 49 |
+| pressure | 29.2 | 30.75 |
+
+Alongside the numeric checks, categorical fields (date, air_carrier, flight_code, destination, condition) were reviewed and found consistent. The only outliers dismissed as false were the two records with **taxi_out** times under 7 minutes, treated as *data errors*.
+
+## Follow-Up Questions and Clarification
 
 A few points needed clarification during (and before) the meeting.
 
-### **Column descriptions**
+### Column descriptions
 
 An issue was found in the column documentation:
 
@@ -200,7 +217,7 @@ The corrected meanings are:
 
 This has been fixed in the analysis.
 
-### **Dew Point Data Issue (already identified before the meeting)**
+### Dew Point Data Issue (already identified before the meeting)
 
 Before the meeting, I had already contacted regarding the corrupted dew point field. The ***dew_point*** column contained corrupted values (e.g., “9Ä” on dates such as Nov 12, Nov 13, Nov 16, Nov 21, Jan 4 etc.).
 
@@ -224,9 +241,9 @@ alpha <- (a * temp) / (b + temp) + log(humidity / 100)
 (b * alpha) / (a - alpha)
 }`
 
-However, the decision was made to follow **manual correction** instead, and updated clean data was provided.
+However, the decision was made to follow **manual correction** instead, and a cleaned data was provided.
 
-## **Conclusion**
+## Conclusion
 
 Based on prior research, it was expected that **weather** and **airport traffic** would be the strongest predictors of taxi-out performance. However in this stage, further assumptions about the weight of each variable are **not safe to make**.
-This phase clarified the dataset’s structure, corrected documentation errors, resolved data-quality issues, and narrowed down which variables deserve deeper modeling attention.With the cleaned data and all clarifications in place, the project now moves into the **second phase**, where proper statistical modeling and scenario testing will begin.
+This phase clarified the dataset’s structure, corrected documentation errors, resolved data-quality issues, and narrowed down which variables deserve deeper modeling attention. With the cleaned data and all clarifications in place, the project now moves into the **second phase**, where proper statistical modeling and scenario testing will begin.
