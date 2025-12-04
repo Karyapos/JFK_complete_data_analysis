@@ -24,7 +24,7 @@ The original dataset contained **23 columns**, many of which were not ideal for 
 10. **taxi_out** – (TAXI_OUT)
 11. **taxi_10tile** (10 tiled taxi_out variable for easier **Power BI** later use)
 
-The database also included pre‑taxi‑out details such as scheduled vs. actual departure and arrival times. These were confirmed not to be relevant for analysis at this stage.However, I included **dep_delay** just to privately examine that also.
+The database also included pre‑taxi‑out details such as scheduled vs. actual departure and arrival times. These were confirmed not to be relevant for analysis at this stage. However, I included **dep_delay** for internal review only.
 
 A separate section was created for **weather_data**:
 
@@ -43,7 +43,7 @@ A separate section was created for **weather_data**:
 
 ## Findings
 
-A selection of the SQL scripts used for data preparation and exploratory checks (e.g., handling missing values, outlier detection, and variable transformations) is included in the file [**SQL_scripts**](SQL_scripts). These provide core steps behind the findings(images).
+This section highlights only a selection of the findings from each variable group. The full exploratory work including every graph, summary table, and distribution check is documented separately, and can be viewed in the file [**images**](images).  In addition, the [**SQL_scripts**](SQL_scripts) folder contains representative queries used during data cleaning and transformation.
 
 ### Weather Variables
 
@@ -80,14 +80,31 @@ Carrier differences were dramatic:
 - AS: ~15% of flights >33 minutes taxi‑out, only ~3% <15 minutes.
 - B6: ~4% >33 minutes, but ~22% <15 minutes.
 
+## Outliers control
+
+| Variable | Lower outlier | Upper outlier |
+| --- | --- | --- |
+| taxi_out | 5 | 41 |
+| distance | 94 | 4983 |
+| sch_dep | 0 | 55 |
+| sch_arr | 0 | 46 |
+| temperature | 17 | 68 |
+| dew_point | -3 | 67 |
+| humidity | 0 | 97 |
+| wind_speed | 0 | 36 |
+| wind_gust | 0 | 49 |
+| pressure | 29.2 | 30.75 |
+
+Alongside the numeric checks, categorical fields (date, air_carrier, flight_code, destination, condition) were reviewed and found consistent. The only outliers dismissed as false were the two records with **taxi_out** times under 7 minutes, treated as *data errors*.
+
 ## Follow‑Up Questions and Clarifications
 
 1. Column descriptions:
-    - ***sch_dep*** was incorrectly described as “number of flights scheduled for arrival.”
-    - Analysis confirmed it should be “scheduled for departure,” while ***sch_arr*** refers to arrivals.
+    - **sch_dep** was incorrectly described as “number of flights scheduled for arrival.”
+    - Analysis confirmed it should be “scheduled for departure,” while **sch_arr** refers to arrivals.
     - This was verified as a documentation typo.
 2. Dew Point errors:
-    - The ***dew_point*** column contained corrupted values (e.g., “9Ä” on dates such as Nov 12, Nov 13, Nov 16, Nov 21, Jan 4).
+    - The **dew_point** column contained corrupted values (e.g., “9Ä” on dates such as Nov 12, Nov 13, Nov 16, Nov 21, Jan 4).
     - Corrected data was later provided manually. I had suggested algorithmic imputation, but manual correction was chosen.
 
 ## Conclusion
