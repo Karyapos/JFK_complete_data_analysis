@@ -195,7 +195,7 @@ Departures had a stronger influence than arrivals, reinforcing that outbound con
 | wind_gust | 0 | 49 |
 | pressure | 29.2 | 30.75 |
 
-Alongside the numeric checks, categorical fields (date, air_carrier, flight_code, destination, condition) were reviewed and found consistent. The only outliers dismissed as false were the two records with **taxi_out** times under 7 minutes, treated as *data errors*.
+Alongside the numeric checks, categorical fields (date, air_carrier, flight_code, destination, condition) were reviewed and found consistent. The only outliers dismissed as false were the two records with **taxi_out** times under 7 minutes, treated as *data errors*.Finally, the two missing values in the **wind** variable were replaced with "CALM", as their corresponding **wind_speed** were 0.
 
 ## Follow-Up Questions and Clarification
 
