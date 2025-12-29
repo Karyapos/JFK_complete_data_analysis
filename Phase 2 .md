@@ -2,7 +2,7 @@
 
 ## Analysis Overview
 
-This document briefly introduces the initial phase of work on the [JFK Airport dataset](https://www.kaggle.com/datasets/deepankurk/flight-take-off-data-jfk-airport/data). The main question guiding this work is: 
+This document provides an overview of the second phase of analysis using the [JFK Airport dataset](https://www.kaggle.com/datasets/deepankurk/flight-take-off-data-jfk-airport/data). The main question guiding this work is: 
 
 **What factors most strongly affect taxi‑out times, and how?**
 
