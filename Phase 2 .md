@@ -48,10 +48,10 @@ As expected from the first phase of the project, weather variables have only a m
 
 | Variable     | η²(part) |
 |--------------|----------|
-| flight_code  | 8%       |
-| departures   | 3%       |
-| destination  | 2%       |
-| carrier      | 0%       |
+| flight_code  | 6.98%       |
+| departures   | 2.51%       |
+| destination  | 1.73%       |
+| carrier      | 0.00%       |
 
 Running a Type II ANOVA on the top four impact variables helps check how much coverage they share with each other. Departures and destination behave as expected, keeping almost the same values as in the main results. However, **flight_code** and **carrier** react differently. **Flight_code** drops by about 4 units from its original 11%, which shows that part of its impact overlaps with the other variables. **Carrier** goes all the way to the bottom, confirming that it contributes practically nothing to **taxi_out** performance. This is interesting because in [Phase 1](https://github.com/Karyapos/JFK_complete_data_analysis/tree/01-sql-eda) the results suggested that **carrier** might have some impact, but that turned out to be misleading.
 
