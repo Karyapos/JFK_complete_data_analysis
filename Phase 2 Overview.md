@@ -59,6 +59,23 @@ Running a Type II ANOVA on the top four impact variables helps check how much 
 
 Running the analysis suggests that **flight_code** should not be treated as a standard variable for correlation or effect‑size interpretation. Although it shows some impact, we should not forget that it contains 2,092 different values across 28,818 records, which makes it behave more like an ID. Any relationship it shows is therefore hard to interpret and may reflect structure in the data rather than a real operational effect. Because of this, there is no clear analytical decision on whether **flight_code** should be considered or eliminated. The choice is ultimately up to stakeholders, depending on whether flight‑level detail is viewed as meaningful for their use case.
 
+### Cramér’s V Diagnostic
+
+To further validate the independence of the top‑impact variables, a Cramér’s V analysis was applied across the relevant categorical pairs. As shown in the figure below: 
+
+![Cramer's table](Visuals/cramer's_table.png)
+
+the only pairs that merit closer examination are **departures ~ destination** and **departures ~ wind**, where a small but non‑negligible signal emerges.
+
+### Secondary Association Check
+
+A set of complementary diagnostics was applied — Cramér’s V, η² from ANOVA, Kruskal–Wallis, and Mutual Information, to assess whether any residual associations exist between the key variables. Across both pairs, the results point to weak but structurally consistent relationships, with no indication of meaningful shared variance.
+
+* For **departures ~ destination**, the Cramér’s V value (0.204), the moderate η² (≈ 9%), and the strong Kruskal–Wallis signal collectively indicate a small but stable association.
+
+* For **departures ~ wind**, all indicators converge toward a very small effect (Cramér’s V = 0.103, η² ≈ 0.6%, MI ≈ 0.02), and the Kruskal–Wallis result confirms that the relationship is statistically detectable but operationally minimal.
+
+
 ## Summary
 
-This phase focused on understanding the actual impact of the most relevant variables and clarifying how much of their signal is unique versus shared. Through effect‑size analysis, partial coverage checks, and Type II ANOVA, we identified which predictors carry real operational meaning and which ones only appeared important in earlier stages. This resolved several misleading impressions from [Phase 1](https://github.com/Karyapos/JFK_complete_data_analysis/tree/01-sql-eda) and provided a clearer picture of the dataset. With these insights established, the next step is to develop visual explorations that highlight the behavior of the most interesting variables and how they interact.
+This phase focused on determining the actual impact of the most relevant variables and clarifying how much of their signal is unique versus shared. Through effect‑size analysis, partial coverage checks, and Type II ANOVA, the predictors with genuine operational relevance were distinguished from those that only appeared influential in earlier stages. This resolved several misleading impressions from [Phase 1](https://github.com/Karyapos/JFK_complete_data_analysis/tree/01-sql-eda) and provided a clearer structural understanding of the dataset. All core code used in this phase is available in the [R_scripts](R_scripts) folder, and selected supporting visuals are included in the [Visuals](Visuals) directory. With these foundations established, the next step involves developing visual explorations that illustrate the behavior of the key variables and their interactions.
