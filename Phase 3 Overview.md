@@ -22,7 +22,20 @@ The work here was carried out primarily in Power BI, with only minimal support f
 
 ### Worst Days Overview
 
-![10_Worst_Days](Visuals/10_Worst_Days.jpg)
+
+| Day | Month | AVG taxi_out | Std Dev taxi_out | AVG departures | Dominant wind | Frequency wind |
+|-----|-------|--------------|------------------|----------------|----------------|-----------------|
+| 30  | 12    | 27.74        | 6.96             | 30.90          | ENE            | 121             |
+| 1   | 12    | 26.43        | 8.13             | 33.15          | ENE            | 140             |
+| 3   | 12    | 26.00        | 8.35             | 30.10          | NW             | 178             |
+| 16  | 1     | 25.07        | 8.43             | 31.33          | NW             | 143             |
+| 19  | 12    | 25.03        | 7.62             | 32.20          | WNW            | 119             |
+| 25  | 1     | 24.39        | 7.82             | 29.97          | ENE            | 85              |
+| 2   | 12    | 24.29        | 8.30             | 34.78          | N              | 112             |
+| 9   | 12    | 24.06        | 8.25             | 30.60          | S              | 144             |
+| 5   | 12    | 23.93        | 7.79             | 31.10          | WNW            | 163             |
+| 5   | 1     | 23.76        | 7.02             | 32.34          | NW             | 178             |
+
 
 ### General points
 
