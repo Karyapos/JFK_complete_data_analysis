@@ -40,6 +40,6 @@ The influence of **departures** and **wind** is confirmed in the variable import
 impor
 
 ## Summary
- This phase approaches modeling with respect for how broad and technically deep the field is, focusing specifically on the areas where **Lasso**, **GAM**, and **Random Forests** apply. The full code is available in the Rmarkdown file for reproducibility, and the separated components can be found in the R_scripts and Visuals directories. 
+ This phase approaches modeling with respect for how broad and technically deep the field is, focusing specifically on the areas where **Lasso**, **Generalized Additive Model**, and **Random Forests** apply. The full code is available in the Rmarkdown file for reproducibility, and the separated components can be found in the R_scripts and Visuals directories. 
 With these foundations in place, stakeholders now have a clearer view of the main drivers of **taxi_out** time and a starting point for further development of operational improvements at **JFK**.
 From an analytical perspective, **departures** appear to play a small yet meaningful role in **taxi_out** effectiveness and represent a sensible direction for further investigation.
