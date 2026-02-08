@@ -65,11 +65,11 @@ To further validate the independence of the top‑impact variables, a Cramér’
 
 ![Cramer's table](Visuals/cramer's_table.png)
 
-the only pairs that merit closer examination are **departures ~ destination** and **departures ~ wind**, where a small but non‑negligible signal emerges.
+The only pairs that merit closer examination are **departures ~ destination** and **departures ~ wind**, where a small but non‑negligible signal emerges.
 
 ### Secondary Association Check
 
-A set of complementary diagnostics was applied — Cramér’s V, η² from ANOVA, Kruskal–Wallis, and Mutual Information, to assess whether any residual associations exist between the key variables. Across both pairs, the results point to weak but structurally consistent relationships, with no indication of meaningful shared variance.
+A set of complementary diagnostics was applied, including Cramér’s V, η² from ANOVA, Kruskal–Wallis, and Mutual Information, to assess whether any residual associations exist between the key variables. Across both pairs, the results point to weak but structurally consistent relationships, with no indication of meaningful shared variance.
 
 * For **departures ~ destination**, the Cramér’s V value (0.204), the moderate η² (≈ 9%), and the strong Kruskal–Wallis signal collectively indicate a small but stable association.
 
