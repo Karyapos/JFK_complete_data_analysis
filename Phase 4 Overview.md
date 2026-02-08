@@ -15,9 +15,12 @@ This phase delivers predictive modeling using LASSO, GAM, and Random Forests, wi
  * **lasso** which given x and y returns  LASSO coefficient table and basic metrics.
  
  The main body of this Phase has three parts:
-* First, the **LASSO** coefficient table: by limiting each run to one or two categorical factors, the goal is to avoid overloading the model and instead identify where meaningful weight appears among the variables.
-* Second, **GAM** models are used to capture the nonlinear structure of the problem, and several combinations are tested.
-* Lastly, **Random Forests** are applied to obtain the strongest predictive model after tuning _nodes_ and _mtry_.
+ 
+* **LASSO**: Each run is limited to one or two categorical factors to avoid overloading the model and to highlight where meaningful coefficient weight appears.
+
+* **GAM**: Several GAM specifications are tested to capture the nonlinear structure of the problem and explore smooth relationships across key variables.
+
+* **Random Forests**: Random Forests are applied last to obtain the strongest predictive model, with tuning focused on nodes and mtry to capture complex interactions.
 
 All models use the same **80~20** split and are evaluated with **RMSE**, **MAE**, and **R²**.
 
@@ -36,8 +39,6 @@ The Random Forest model including all usable variables delivers the best results
 * **R²: 0.10**
 
 The influence of **departures** and **wind** is confirmed in the variable importance plot shown below. While the **carrier** also ranks among the top three variables, its special identity should raise concerns for stakeholders about whether it should be included in the calculations.
-
-impor
 
 ## Summary
  This phase approaches modeling with respect for how broad and technically deep the field is, focusing specifically on the areas where **Lasso**, **Generalized Additive Model**, and **Random Forests** apply. The full code is available in the Rmarkdown file for reproducibility, and the separated components can be found in the R_scripts and Visuals directories. 
