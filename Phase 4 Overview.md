@@ -11,14 +11,14 @@ This phase delivers predictive modeling using LASSO, GAM, and Random Forests, wi
 ## Methodology Overview
 
  For efficiency and reproducibility two functions were created: 
- * **evaluation** which given the model and the test_data it returns basic metrics
- * **lasso** which given x and y returns  LASSO coefficient table and basic metrics.
+ * [**evaluation**](R_scripts/evaluation_function.R) which given the model and the test_data it returns basic metrics
+ * [**lasso**](R_scripts/lasso_function.R) which given x and y returns  LASSO coefficient table and basic metrics.
  
  The main body of this Phase has three parts:
  
 * **LASSO**: Each run is limited to one or two categorical factors to avoid overloading the model and to highlight where meaningful coefficient weight appears.
 
-* **GAM**: Several GAM specifications are tested to capture the nonlinear structure of the problem and explore smooth relationships across key variables.
+* **GAM**: Several Generalized Additive Models specifications are tested to capture the nonlinear structure of the problem and explore smooth relationships across key variables.
 
 * **Random Forests**: Random Forests are applied last to obtain the strongest predictive model, with tuning focused on nodes and mtry to capture complex interactions.
 
@@ -41,6 +41,6 @@ The Random Forest model including all usable variables delivers the best results
 The influence of **departures** and **wind** is confirmed in the variable importance plot shown below. While the **carrier** also ranks among the top three variables, its special identity should raise concerns for stakeholders about whether it should be included in the calculations.
 
 ## Summary
- This phase approaches modeling with respect for how broad and technically deep the field is, focusing specifically on the areas where **Lasso**, **Generalized Additive Model**, and **Random Forests** apply. The full code is available in the Rmarkdown file for reproducibility, and the separated components can be found in the R_scripts and Visuals directories. 
+ This phase approaches modeling with respect for how broad and technically deep the field is, focusing specifically on the areas where **Lasso**, **Generalized Additive Model**, and **Random Forests** apply. The full code is available in the Rmarkdown file for reproducibility, and the separated components can be found in the [R_scripts](R_scripts) and [Visuals](Visuals) directories. 
 With these foundations in place, stakeholders now have a clearer view of the main drivers of **taxi_out** time and a starting point for further development of operational improvements at **JFK**.
 From an analytical perspective, **departures** appear to play a small yet meaningful role in **taxi_out** effectiveness and represent a sensible direction for further investigation.
