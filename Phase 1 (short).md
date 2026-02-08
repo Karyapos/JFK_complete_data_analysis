@@ -99,13 +99,11 @@ Alongside the numeric checks, categorical fields (date, air_carrier, flight_code
 
 ## Follow‑Up Questions and Clarifications
 
-1. Column descriptions:
-    - **sch_dep** was incorrectly described as “number of flights scheduled for arrival.”
-    - Analysis confirmed it should be “scheduled for departure,” while **sch_arr** refers to arrivals.
-    - This was verified as a documentation typo.
-2. Dew Point errors:
-    - The **dew_point** column contained corrupted values (e.g., “9Ä” on dates such as Nov 12, Nov 13, Nov 16, Nov 21, Jan 4).
-    - Corrected data was later provided manually. I had suggested algorithmic imputation, but manual correction was chosen.
+Two data issues were identified and resolved during preprocessing.
+
+First, the **sch_dep** column had been mislabeled in the original documentation. It was described as the number of flights scheduled for arrival, but analysis confirmed it actually represents scheduled departures, while **sch_arr** refers to arrivals. This was verified as a simple documentation error.
+
+Second, the **dew_point** variable contained corrupted entries (for example “**9Ä**” on several dates including Nov 12, Nov 13, Nov 16, Nov 21, and Jan 4). Although algorithmic imputation was initially considered, the dataset was ultimately corrected manually using the clean values provided later.
 
 ## Conclusion
 
