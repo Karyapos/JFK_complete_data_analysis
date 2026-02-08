@@ -6,15 +6,17 @@ This document provides an overview of the third phase of analysis using the [JFK
 
 **What factors most strongly affect taxi‑out times, and how?**
 
-This section presents, through heatmaps, KPI cards, bar charts, slicers, and boxplots, how the most influential variables behave with respect to taxi‑out times. Following the [Phase 2](https://github.com/Karyapos/JFK_complete_data_analysis/tree/02-R-correlation) findings, stakeholders chose to focus on **wind** and **departure**, agreeing not to emphasize **flight_code**, **carrier**, or **destination** due to their operational specificity.
+This section presents, through heatmaps, KPI cards, bar charts, slicers, and boxplots, how the most influential variables relate to taxi-out times. Following the [Phase 2](https://github.com/Karyapos/JFK_complete_data_analysis/tree/02-R-correlation) findings, stakeholders chose to focus on **wind** and **departure**, agreeing not to emphasize **flight_code**, **carrier**, or **destination** due to their operational specificity.
 
 The work here was carried out primarily in Power BI, with only minimal support from R for a few supplementary visuals and **SQL** for basic aggregations that supported the selection phase.
 
 ## Wind Selection 
 
-The **wind** selection follows a simple, operationally meaningful rule:
-* include any wind direction whose average **taxi_out** deviates by at least **0.5** minutes from the global mean (**20.86**),
-* provided it has more than **500** observations.
+The wind categories were selected using two operational filters:
+
+* **Deviation** : include any wind direction with an average **taxi_out** at least **0.5 minutes** above or below the global mean (**20.86**).
+
+* **Volume** : include only wind directions with **more than 500 observations** to avoid noise‑driven effects.
 
 This ensures that only **wind** groups with both practical impact and statistical weight are considered.
 
