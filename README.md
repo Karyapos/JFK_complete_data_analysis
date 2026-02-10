@@ -64,3 +64,67 @@ Each phase builds on the previous one, moving from raw data to interpretable ins
 
 Based on these findings, stakeholders decided to proceed with a focused analysis centered on **wind** and **departures**, as these variables showed the most consistent relationships.
 
+## Phase 3 — Power BI Dashboard
+
+The taxi‑out analysis dashboard was separated into **Main**, **Departures Traffic**, and **Wind** views, each focused on a specific operational dimension.
+
+## Dashboard Components
+
+* **Taxi_out** metrics overview
+
+* Selection of ntiles or clusters
+
+* Compact slicers for choosing specific days or periods
+
+* Heatmaps
+
+* Boxplots
+
+* Bar charts and column charts
+
+### Purpose
+The dashboard was designed to:
+
+explore patterns
+
+compare operational groups
+
+identify crucial subgroups or specific circumstances that diverge from general behavior
+
+validate assumptions visually
+
+### Design Note
+The dashboard intentionally remains clean and minimal, prioritizing clarity and instant ,readability. Complex effects, such as shadows, gradients, or decorative color fades for example, were avoided to maintain a professional, distraction‑free layout.
+
+## Phase 4 — R Predictive Modeling
+### Predictive Models
+#### LASSO  
+Used mainly to identify which variables carry meaningful signal.
+Multiple runs were performed with different categorical groupings to avoid over‑parameterization.
+
+#### GAM  
+Used to capture non‑linear relationships across variables.
+Provided interpretable smooth functions but limited predictive power.
+
+#### Random Forest  
+Delivered the strongest performance, especially after tuning.
+
+### Top Model
+A Random Forest using all usable variables achieved the best generalization performance.
+Variable importance confirmed that departure traffic, together with the carrier and wind variables, are the most influential drivers of taxi‑out time.
+
+### Important Notes
+Each model was evaluated using exactly the same train/test splits and standard metrics (MAE, RMSE, R²) to ensure a consistent and logical comparison.
+
+The tuning process concluded with:
+maxnodes = 500, nodesize = 150, ntree = 500, mtry = 6.
+
+The overall metrics for this specific “top model” were confirmed across 30 replicable splits.
+
+You can access the R Markdown file for full reproducibility.
+
+## Conclusion
+
+This project demonstrates how a structured end-to-end analysis can extract evidence-based insights while minimizing personal bias. Even with a limited and noisy dataset and a low-signal problem space, the analysis consistently shows that **departure traffic** is the only factor with a small but stable and repeatable impact on **taxi_out** performance, from initial exploration through dashboarding to final predictive modeling.
+
+Readers interested in the analytical reasoning are encouraged to follow the logic trail across each phase of the project, where assumptions, reproducibility assets, and supporting visuals are documented step by step.
