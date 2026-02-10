@@ -20,10 +20,10 @@ The original dataset contained **23 columns**, many of which were not ideal for 
 6. **dep_delay** – (dep_delay)
 7. **distance** – (DISTANCE)
 8. **departures** – (sch_arr)
-9. **departures_5tile** (5 tiled departures variable for later use)
+9. **departures_5tile** – (5 tiled departures variable for later use)
 10. **arrivals** – (sch_dep)
 11. **taxi_out** – (TAXI_OUT)
-12. **taxi_10tile** (10 tiled taxi_out variable for later use)
+12. **taxi_10tile** – (10 tiled taxi_out variable for later use)
 
 The database also included pre‑taxi‑out details such as scheduled vs. actual departure and arrival times. These were confirmed not to be relevant for analysis at this stage. However, I included **dep_delay** for internal review only.
 
@@ -31,15 +31,15 @@ A separate section was created for **weather_data**:
 
 1. **id**
 2. **timestamp** – (MONTH, DAY_OF_MONTH,crs_dep_m)
-3. **temperature** (Temperature)
-4. **dew_point** (Dew Point)
-5. **humidity** (Humidity)
-6. **wind** (Wind)
-7. **wind_speed** (Wind Speed)
-8. **wind_gust** (Wind Gust)
-9. **pressure** (Pressure)
-10. **condition** (Condition)
-11. **taxi_out** (TAXI_OUT)
+3. **temperature** – (Temperature)
+4. **dew_point** – (Dew Point)
+5. **humidity** – (Humidity)
+6. **wind** – (Wind)
+7. **wind_speed** – (Wind Speed)
+8. **wind_gust** – (Wind Gust)
+9. **pressure** – (Pressure)
+10. **condition** – (Condition)
+11. **taxi_out** – (TAXI_OUT)
 12. **taxi_10tile** 
 
 ## Outliers control
