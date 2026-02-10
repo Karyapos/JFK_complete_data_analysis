@@ -1,0 +1,211 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+# JFK Data Analysis - Phase 4
+
+## Analysis Overview
+
+This phase delivers predictive modeling using LASSO, GAM, and Random Forests, with cross‑validation and feature evaluation.
+
+## Set Up
+
+Reading the data, loading required libraries, and setting the seed.
+
+```{r set_up,message=FALSE, warning=FALSE }
+
+library(readxl)
+data<-read_xlsx("all_data.xlsx")
+
+library(dplyr)
+library(lubridate)
+library(fastDummies)
+library(glmnet)
+library(mgcv)
+library(randomForest)
+library(Metrics)
+set.seed(1542)
+```
+
+## Data transformation
+
+The variables **id**,**flight_code**,**destination** were eliminated
+since they actually behave as identifiers. 
+The raw original **timestamp** variable was converted to useful **hour**
+and **weekday**.
+Categorical columns that will be used were transformed to factors for safety.
+
+
+```{r transformation }
+data<-data %>%
+        mutate(timestamp=ymd_hms(timestamp),
+               hour=hour(timestamp),
+               weekday=wday(timestamp,label = TRUE),
+               weekday=factor(weekday,ordered = FALSE),
+               carrier=factor(carrier),
+               wind=factor(wind)) %>%
+        select(-c(id,timestamp,flight_code,
+                  destination,taxi_10tile))
+```
+
+## Functions
+
+For efficiency and reproducibility two functions were created: 
+
+ * **evaluation** which given the model and the test_data it returns basic metrics
+ 
+ * **lasso** which given x and y returns  LASSO coefficient table and basic metrics.
+ 
+```{r functions}
+evaluation<-function(model,test_data){
+        f_pred<-predict(model,newdata = test_data)
+        f_mae<-mae(test_data$taxi_out,f_pred)
+        f_rmse<-rmse(test_data$taxi_out,f_pred)
+        f_ss_res<-sum((test_data$taxi_out-f_pred)^2)
+        f_ss_tot<-sum((test_data$taxi_out-mean(test_data$taxi_out))^2)
+        f_r2<-1-f_ss_res/f_ss_tot
+        return(list(mae=f_mae,rmse=f_rmse,r2=f_r2))
+}
+
+lasso<-function(x,y){
+        n<-nrow(x)
+        set.seed(1542)
+        train_idx<-sample(seq_len(n),size = 0.8*n)
+        x_train<-x[train_idx,]
+        y_train<-y[train_idx]
+        x_test<-x[-train_idx,]
+        y_test<-y[-train_idx]
+        cv_model<-cv.glmnet(x_train,y_train)
+        lambda<-cv_model$lambda.min
+        
+        
+        model<-glmnet(x_train,y_train,lambda=lambda)
+        
+        f_pred<-predict(model,newx = x_test,s=lambda)
+        f_mae<-mae(y_test,f_pred)
+        f_rmse<-rmse(y_test,f_pred)
+        f_ss_res<-sum((y_test-f_pred)^2)
+        f_ss_tot<-sum((y_test-mean(y_test))^2)
+        f_r2<-1-f_ss_res/f_ss_tot
+        
+        coeftable<-data.frame(variabes=row.names(coef(model)),
+                              values=as.numeric(round(coef(model),4)))
+        coeftable<-coeftable[order(abs(coeftable$values),
+                                              decreasing = TRUE),]
+        return(list(mae=f_mae,rmse=f_rmse,r2=f_r2,coef=head(coeftable,6)))
+        
+}
+```
+
+## Lasso
+
+The key focus is the LASSO coefficient table, with each run limited to one or two categorical factors to prevent overloading and reveal where meaningful variable weight appears.
+
+```{r lasso}
+y1<-data$taxi_out
+lasso_data1<- data %>%
+        dummy_cols(select_columns = "weekday") %>%
+        select(-c(carrier,wind,taxi_out))
+x1<-model.matrix(~.,data = lasso_data1)
+lasso(x1,y1)
+
+y2<-data$taxi_out
+lasso_data2<-data %>%
+        dummy_cols(select_columns = "carrier") %>%
+        select(-c(wind,weekday,taxi_out))
+x2<-model.matrix(~.,data = lasso_data2)
+lasso(x2,y2)
+
+y3<-data$taxi_out
+lasso_data3<-data%>%
+        dummy_cols(select_columns = "wind") %>%
+        select(-c(carrier,weekday,taxi_out))
+x3<-model.matrix(~.,data=lasso_data3)
+lasso(x3,y3)
+
+y4<-data$taxi_out
+lasso_data4<-data%>%
+        dummy_cols(select_columns = c("wind","carrier")) %>%
+        select(-c(weekday,taxi_out))
+x4<-model.matrix(~.,data=lasso_data4)
+lasso(x4,y4)
+
+y5<-data$taxi_out
+lasso_data5<-data %>%
+        select(departures,wind)
+x5<-model.matrix(~.,data = lasso_data5)
+lasso(x5,y5)
+```
+
+## GAM
+
+To capture potential non‑linear relationships, several GAM combinations were tested.
+
+```{r gam}
+n<-nrow(data)
+train_idx<-sample(seq_len(n),size = 0.8*n)
+gam_data1<- data %>%
+        select(dep_delay,departures,arrivals,temperature,wind,taxi_out)
+train_data1<-gam_data1[train_idx,]
+test_data1<-gam_data1[-train_idx,]
+gam_model1<-gam(taxi_out~s(departures) +wind,data = train_data1,
+                method = "REML")
+evaluation(gam_model1,test_data1)
+gam_model2<-gam(taxi_out~s(dep_delay)+s(departures)+s(arrivals)
+                +s(temperature)+wind, data = train_data1,
+                method = "REML")
+evaluation(gam_model2,test_data1)
+
+gam_data2<- data %>%
+        select(dep_delay,departures,arrivals,temperature,carrier,taxi_out)
+train_data2<-gam_data2[train_idx,]
+test_data2<-gam_data2[-train_idx,]
+gam_model3<-gam(taxi_out~s(departures) +carrier+s(dep_delay)
+                +s(arrivals)+s(temperature),data = train_data2,
+                method = "REML")
+evaluation(gam_model3,test_data2)
+```
+
+## Random Forests
+
+In order to detect more complex interactions, Random Forests were used.
+
+```{r randomForest}
+rf1_train<-data[train_idx,] %>%
+        select(c(departures,wind,taxi_out))
+rf1_test<-data[-train_idx,] %>%
+        select(c(departures,wind,taxi_out))
+rf1<-randomForest(taxi_out~.,
+                  data=rf1_train,
+                  mtry=2,
+                  maxnodes=30)
+evaluation(rf1,rf1_test)
+
+rf2_train<-data[train_idx,]
+rf2_test<-data[-train_idx,]
+rf2<-randomForest(taxi_out~.,
+                  data=rf2_train,
+                  mtry=6,
+                  importance=TRUE,
+                  maxnodes=500,
+                  nodesize=150)
+evaluation(rf2,rf2_test)
+```
+
+## Top Model Result
+
+The Random Forest model including all usable variables delivers the best results:
+
+```{r top_model}
+evaluation(rf2,rf2_test)
+imp<- importance(rf2)
+imp_table<-data.frame(variable=rownames(imp),importance=imp[,1],
+                      row.names = NULL)
+imp_table <- imp_table[order(imp_table$importance, decreasing = TRUE), ]
+imp_table
+```
+
+## Summary
+        
+With these foundations in place, stakeholders now have a clearer view of the main drivers of taxi_out time and a starting point for further development of operational improvements at JFK. From an analytical perspective, departures appear to play a meaningful role in taxi_out performance and represent a sensible direction for further investigation.
