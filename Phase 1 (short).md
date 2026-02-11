@@ -1,4 +1,4 @@
-# JFK Data Analysis - Phase 1 (short)
+# JFK Data Analysis - Phase 1 Overview
 
 ## Analysis Overview
 
