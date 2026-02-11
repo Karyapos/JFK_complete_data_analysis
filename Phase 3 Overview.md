@@ -56,7 +56,7 @@ However, in the boxplot analysis northern winds (N, NE, NNE) show a right‑skew
 
 ## Dashboard Overview
 
-The [dashboard](JFK_Taxi‑Out_Data_Analysis.pbix) is structured as follows:
+The [dashboard](JFK_Taxi_Out_Dashboard.pbix) is structured as follows:
 
 [**Main**](Visuals/Main.png)
 
