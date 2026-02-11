@@ -68,7 +68,7 @@ Based on these findings, stakeholders decided to proceed with a focused analysis
 
 The taxi‑out analysis dashboard was separated into **Main**, **Departures Traffic**, and **Wind** views, each focused on a specific operational dimension.
 
-## Dashboard Components
+### Dashboard Components
 
 * **Taxi_out** metrics overview
 
@@ -83,18 +83,17 @@ The taxi‑out analysis dashboard was separated into **Main**, **Departures Traf
 * Bar charts and column charts
 
 ### Purpose
-The dashboard was designed to:
 
-explore patterns
+* explore patterns
 
-compare operational groups
+* compare operational groups
 
-identify crucial subgroups or specific circumstances that diverge from general behavior
+* identify crucial subgroups or specific circumstances that diverge from general behavior
 
-validate assumptions visually
+* validate assumptions visually
 
 ### Design Note
-The dashboard intentionally remains clean and minimal, prioritizing clarity and instant ,readability. Complex effects, such as shadows, gradients, or decorative color fades for example, were avoided to maintain a professional, distraction‑free layout.
+The dashboard intentionally remains clean and minimal, prioritizing clarity and instant readability. Complex effects, such as shadows, gradients, or decorative color fades for example, were avoided to maintain a professional, distraction‑free layout.
 
 ## Phase 4 — R Predictive Modeling
 ### Predictive Models
@@ -111,7 +110,7 @@ Delivered the strongest performance, especially after tuning.
 
 ### Top Model
 A Random Forest using all usable variables achieved the best generalization performance.
-Variable importance confirmed that departure traffic, together with the carrier and wind variables, are the most influential drivers of taxi‑out time.
+Variable importance confirmed that departure traffic together with the carrier and wind variables, are the most influential drivers of taxi‑out time.
 
 ### Important Notes
 Each model was evaluated using exactly the same train/test splits and standard metrics (MAE, RMSE, R²) to ensure a consistent and logical comparison.
@@ -121,7 +120,7 @@ maxnodes = 500, nodesize = 150, ntree = 500, mtry = 6.
 
 The overall metrics for this specific “top model” were confirmed across 30 replicable splits.
 
-You can access the R Markdown file for full reproducibility.
+You can access the [R_Markdown](Phase_4.Rmd) file for full reproducibility.
 
 ## Conclusion
 
