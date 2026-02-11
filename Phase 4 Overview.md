@@ -10,9 +10,9 @@ This phase delivers predictive modeling using **LASSO**, **GAM**, and **Random F
 
 ## Methodology Overview
 
- For efficiency and reproducibility two functions were created: 
- * [**evaluation**](R_scripts/evaluation_function.R) which given the model and the test_data it returns basic metrics
- * [**lasso**](R_scripts/lasso_function.R) which given x and y returns LASSO coefficient table and basic metrics.
+ For efficiency and reproducibility, two functions were created: 
+ * [**evaluation**](R_scripts/evaluation_function.R) which given the model and the test_data, it returns basic metrics
+ * [**lasso**](R_scripts/lasso_function.R) which given x and y, it returns LASSO coefficient table and basic metrics.
  
  The main body of this Phase has three parts:
  
@@ -22,7 +22,7 @@ This phase delivers predictive modeling using **LASSO**, **GAM**, and **Random F
 
 * **Random Forests**: Finally, Random Forests are applied to obtain the strongest predictive model, with tuning focused on nodes and mtry to capture complex interactions.
 
-All models use the same **80~20** split and are evaluated with **RMSE**, **MAE**, and **R²**.
+All models use the same **80/20** split and are evaluated with **RMSE**, **MAE**, and **R²**.
 
 ## Variable Selection
  The variables **id**, **flight_code**, **distance** and **destination** were removed because they effectively behave as identifiers.
