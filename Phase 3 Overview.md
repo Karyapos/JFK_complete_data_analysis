@@ -6,7 +6,7 @@ This document provides an overview of the third phase of analysis using the [JFK
 
 **What factors most strongly affect taxi‑out times, and how?**
 
-This section presents, through heatmaps, KPI cards, bar charts, slicers, and boxplots, how the most influential variables relate to taxi-out times. Following the [Phase 2](https://github.com/Karyapos/JFK_complete_data_analysis/tree/02-R-correlation) findings, stakeholders chose to focus on **wind** and **departure**, agreeing not to emphasize **flight_code**, **carrier**, or **destination** due to their operational specificity.
+This section presents, through heatmaps, KPI cards, bar charts, slicers, and boxplots, how the most influential variables relate to taxi-out times. Following the [Phase 2](https://github.com/Karyapos/JFK_complete_data_analysis/tree/02-R-correlation) findings, Stakeholders agreed to prioritize **wind** and **departure** traffic as the main focus, with **carrier** still reviewed but not treated as a top‑priority driver, while **flight_code**, **destination**, and **distance** were excluded from further analysis.
 
 The work here was carried out primarily in Power BI, with only minimal support from R for a few supplementary visuals and **SQL** for basic aggregations that supported the selection phase.
 
@@ -14,13 +14,13 @@ The work here was carried out primarily in Power BI, with only minimal support f
 
 The wind categories were selected using two operational filters:
 
-* **Deviation** : include any wind direction with an average **taxi_out** at least **0.5 minutes** above or below the global mean (**20.86**).
+* **Deviation** : include any **wind** direction with an average **taxi_out** at least **0.5 minutes** above or below the global mean (**20.86**).
 
-* **Volume** : include only wind directions with **more than 500 observations** to avoid noise‑driven effects.
+* **Volume**: include only **wind** directions with **more than 500 observations** to avoid noise‑driven effects.
 
 This ensures that only **wind** groups with both practical impact and statistical weight are considered.
 
-However, the boxplot analysis adds an important nuance. The northern winds (N, NE, NNE) show a right‑skewed distribution with a low median and, in the case of N, several extreme upper outliers. For that reason, **N** is retained in the analysis. Based on these criteria, the **wind** directions selected for deeper investigation are: 
+However, in the boxplot analysis northern winds (N, NE, NNE) show a right‑skewed distribution with a low median and, in the case of N, several extreme upper outliers. For that reason, **N** is retained in the analysis. Based on these criteria, the **wind** directions selected for deeper investigation are: 
 **ENE**, **N**, **NE**, **NNE**, **NNW**, **SW**, **WNW**, **WSW** .
 
 ## Key findings
@@ -48,7 +48,7 @@ However, the boxplot analysis adds an important nuance. The northern winds (N, N
 
 * When **departures** < 18, the average **taxi_out** drops to **18.23** (**≈ 2,000 flights**).
 
-* Out of **28,818** reported flights, roughly **17,000** are westbound and **5,500** eastbound.
+* Out of **28,818** reported flights, over **17,000** are westbound, while only **5,500** eastbound .
 
 * When the **wind** blows **ENE**, the average **taxi_out** rises to **23.17** (**≈ 1,000 flights**).
 
@@ -69,4 +69,4 @@ The [dashboard](JFK_Taxi‑Out_Data_Analysis.pbix) is structured as follows:
 
 This stage focused on translating the statistical findings from the previous [Phase 2](https://github.com/Karyapos/JFK_complete_data_analysis/tree/02-R-correlation) into something readable in seconds. Heatmaps, KPI cards, bar charts, slicers, and boxplots were arranged to show when **taxi_out** performance breaks down, how often these conditions occur, and which **wind** and **departure** patterns consistently drive the variation.The goal was to build a clean, operational dashboard that exposes how the key variables behave without adding visual noise. The structure is intentionally minimal: only the visuals that clarify **departures**, **wind**, and their impact on **taxi_out** are included, avoiding shadows, complex colors, or any other unnecessary styling that would blur the underlying assumptions. 
 
-All core code used in this phase is available in the [Scripts](Scripts) folder, and selected supporting visuals are included in the [Visuals](Visuals) directory. With these foundations established, , the next step is to develop **predictive models**.
+All core code used in this phase is available in the [Scripts](Scripts) folder, and selected supporting visuals are included in the [Visuals](Visuals) directory. With these foundations established, the next step is to develop **predictive models**.
