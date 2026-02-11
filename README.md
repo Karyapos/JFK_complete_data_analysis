@@ -2,7 +2,7 @@
 
 ## Project Summary
 
-This repository documents a complete, end‑to‑end analytical workflow on the JFK Airport taxi‑out dataset.
+This repository documents a complete, end‑to‑end analytical workflow applied to the JFK Airport taxi‑out dataset.
 Across four phases, [SQL EDA](https://github.com/Karyapos/JFK_complete_data_analysis/tree/01-sql-eda), [R correlation analysis](https://github.com/Karyapos/JFK_complete_data_analysis/tree/02-R-correlation), [Power BI dashboard development](https://github.com/Karyapos/JFK_complete_data_analysis/tree/03-PowerBi-dashboard), and [R modeling](https://github.com/Karyapos/JFK_complete_data_analysis/tree/04-R-Modeling), the project investigates the central question:
 
 **What factors most strongly affect taxi‑out times, and how?**
@@ -37,7 +37,7 @@ Each phase builds on the previous one, moving from raw data to interpretable ins
 
 * Most weather variables showed weak relationships with **taxi_out** time, with **wind** being the only variable showing a noticeable effect
 
-* **Departures** , **arrivals** , and **distance** emerged as potentially meaningful predictors
+* **Departures** and **arrivals** emerged as potentially meaningful predictors
 
 * Ambiguities in **carrier**, **destination**, and **flight_code** suggest these fields require clarification before modeling
 
@@ -49,7 +49,7 @@ Each phase builds on the previous one, moving from raw data to interpretable ins
 
 * Performed **ANOVA** tests to evaluate taxi‑out differences across categorical groups
 
-* Examined the special behavior of variables such as **flight_code**, **destination/distance**, and **carrier**
+* Examined the special behavior of variables such as **flight_code**, **destination** , **distance** and **carrier**
 
 * Measured cross‑variable associations using **Cramér’s V** and **ANOVA** based effect sizes
 
@@ -84,13 +84,13 @@ The taxi‑out analysis dashboard was separated into **Main**, **Departures Traf
 
 ### Purpose
 
-* explore patterns
+* Explore patterns
 
-* compare operational groups
+* Compare operational groups
 
-* identify crucial subgroups or specific circumstances that diverge from general behavior
+* Identify crucial subgroups or specific circumstances that diverge from general behavior
 
-* validate assumptions visually
+* Validate assumptions visually
 
 ### Design Note
 The dashboard intentionally remains clean and minimal, prioritizing clarity and instant readability. Complex effects, such as shadows, gradients, or decorative color fades for example, were avoided to maintain a professional, distraction‑free layout.
@@ -110,7 +110,7 @@ Delivered the strongest performance, especially after tuning.
 
 ### Top Model
 A Random Forest using all usable variables achieved the best generalization performance.
-Variable importance confirmed that departure traffic together with the carrier and wind variables, are the most influential drivers of taxi‑out time.
+Variable importance confirmed that **departure** traffic together with the **carrier** and **wind** variables are the most influential drivers of taxi‑out time.
 
 ### Important Notes
 Each model was evaluated using exactly the same train/test splits and standard metrics (MAE, RMSE, R²) to ensure a consistent and logical comparison.
