@@ -2,7 +2,7 @@
 
 ## Project Summary
 
-This repository documents a complete, end‑to‑end analytical workflow applied to the JFK Airport taxi‑out dataset.
+This repository documents a complete, end‑to‑end analytical workflow applied to the [JFK Airport dataset](https://www.kaggle.com/datasets/deepankurk/flight-take-off-data-jfk-airport/data).
 Across four phases, [SQL EDA](https://github.com/Karyapos/JFK_complete_data_analysis/tree/01-sql-eda), [R correlation analysis](https://github.com/Karyapos/JFK_complete_data_analysis/tree/02-R-correlation), [Power BI dashboard development](https://github.com/Karyapos/JFK_complete_data_analysis/tree/03-PowerBi-dashboard), and [R modeling](https://github.com/Karyapos/JFK_complete_data_analysis/tree/04-R-Modeling), the project investigates the central question:
 
 **What factors most strongly affect taxi‑out times, and how?**
