@@ -4,7 +4,7 @@
 
 This document provides an overview of the third phase of analysis using the [JFK Airport dataset](https://www.kaggle.com/datasets/deepankurk/flight-take-off-data-jfk-airport/data). The main question guiding this work is: 
 
-**What factors most strongly affect taxi‑out times, and how?**
+**Which factors most strongly influence taxi‑out times, and how?**
 
 This section presents, through heatmaps, KPI cards, bar charts, slicers, and boxplots, how the most influential variables relate to taxi-out times. Following the [Phase 2](https://github.com/Karyapos/JFK_complete_data_analysis/tree/02-R-correlation) findings, Stakeholders agreed to prioritize **wind** and **departure** traffic as the main focus, with **carrier** still reviewed but not treated as a top‑priority driver, while **flight_code**, **destination**, and **distance** were excluded from further analysis.
 
