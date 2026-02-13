@@ -4,7 +4,7 @@
 
 This document briefly introduces the initial phase of work on the [JFK Airport dataset](https://www.kaggle.com/datasets/deepankurk/flight-take-off-data-jfk-airport/data). The main question guiding this work is: 
 
-**What factors most strongly affect taxi‑out times, and how?**
+**Which factors most strongly influence taxi‑out times, and how?**
 
 This section covers basic transformations, exploratory findings, and clarifications from the first follow‑up meeting, including handling outliers, missing values, wrong labels and non-analysis-ready columns .  All analyses and transformations in this stage were performed in **SQL**.
 
