@@ -4,7 +4,7 @@
 
 This document provides an overview of the second phase of analysis using the [JFK Airport dataset](https://www.kaggle.com/datasets/deepankurk/flight-take-off-data-jfk-airport/data). The main question guiding this work is: 
 
-**What factors most strongly affect taxi‑out times, and how?**
+**Which factors most strongly influence taxi‑out times, and how?**
 
 This section covers correlation checks, ANOVA comparisons, and ranking the most influential variables. It’s the part that directly answers the main project question. The work here used both SQL and R, with most of the analysis carried out in the R environment.
 
