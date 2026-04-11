@@ -58,15 +58,15 @@ However, in the boxplot analysis northern winds (N, NE, NNE) show a right‑skew
 
 The [dashboard](JFK_Taxi_Out_Dashboard.pbix) is structured as follows:
 
-[**Main**](Visuals/Main.png)
+![**Main**](Visuals/Main.png)
 
-[**Departures**](Visuals/Departures.png)
+![**Departures**](Visuals/Departures.png)
 
-[**Wind**](Visuals/Wind.png)
+![**Wind**](Visuals/Wind.png)
 
 
 ## Summary
 
-This stage focused on translating the statistical findings from the previous [Phase 2](https://github.com/Karyapos/JFK_complete_data_analysis/tree/02-R-correlation) into something readable in seconds. Heatmaps, KPI cards, bar charts, slicers, and boxplots were arranged to show when **taxi_out** performance breaks down, how often these conditions occur, and which **wind** and **departure** patterns consistently drive the variation.The goal was to build a clean, operational dashboard that exposes how the key variables behave without adding visual noise. The structure is intentionally minimal: only the visuals that clarify **departures**, **wind**, and their impact on **taxi_out** are included, avoiding shadows, complex colors, or any other unnecessary styling that would blur the underlying assumptions. 
+This stage focused on translating the statistical findings from the previous [Phase 2](https://github.com/Karyapos/JFK_complete_data_analysis/tree/main/02-R-correlation) into something readable in seconds. Heatmaps, KPI cards, bar charts, slicers, and boxplots were arranged to show when **taxi_out** performance breaks down, how often these conditions occur, and which **wind** and **departure** patterns consistently drive the variation.The goal was to build a clean, operational dashboard that exposes how the key variables behave without adding visual noise. The structure is intentionally minimal: only the visuals that clarify **departures**, **wind**, and their impact on **taxi_out** are included, avoiding shadows, complex colors, or any other unnecessary styling that would blur the underlying assumptions. 
 
 All core code used in this phase is available in the [Scripts](Scripts) folder, and selected supporting visuals are included in the [Visuals](Visuals) directory. With these foundations established, the next step is to develop **predictive models**.
