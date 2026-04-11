@@ -6,7 +6,7 @@ This document provides an overview of the fourth phase of analysis using the [JF
 
 **Which factors most strongly influence taxi‑out times, and how?**
 
-This phase delivers predictive modeling using **LASSO**, **GAM**, and **Random Forests**, with cross‑validation and feature evaluation, all executed in **R** environment.
+This phase delivers predictive modeling using **LASSO**, **GAM**, and **Random Forests**, with cross‑validation and feature evaluation, all executed in **R** environment.The full reproducible code for this section is available on [RPubs](https://rpubs.com/Karyapos/1420138).
 
 ## Methodology Overview
 
