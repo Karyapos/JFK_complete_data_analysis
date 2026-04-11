@@ -6,7 +6,7 @@ This document provides an overview of the second phase of analysis using the [JF
 
 **Which factors most strongly influence taxi‑out times, and how?**
 
-This section covers correlation checks, ANOVA comparisons, and ranking the most influential variables. It’s the part that directly answers the main project question. The work here used both SQL and R, with most of the analysis carried out in the R environment.
+This section covers correlation checks, ANOVA comparisons, and ranking the most influential variables. It’s the part that directly answers the main project question. The work here used both SQL and R, with most of the analysis carried out in the R environment. The full reproducible code for this section is available on [RPubs](https://rpubs.com/Karyapos/1420134).
 
 ## Methodology Overview
 
