@@ -1,0 +1,119 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# JFK Data Analysis - Phase 2 
+
+## Analysis Overview
+
+This R Markdown file summarizes Phase 2 of the [JFK complete data analysis](https://github.com/Karyapos/JFK_complete_data_analysis). 
+It presents the core R code used to rank each variable’s influence on taxi_out. Most data preparation was done in SQL, and all effect‑size calculations were performed in R using Pearson correlations and ANOVA
+for numeric and categorical predictors.
+
+
+## Setup
+
+The following libraries were used:
+
+```{r setup, message=FALSE, warning=FALSE}
+
+library(dplyr)
+library(lsr)
+library(lubridate)
+
+airport_data<-read.csv2("airport_data_SQL.csv", 
+                        header = TRUE, sep = ",")
+weather_data<-read.csv2("weather_data_SQL.csv", 
+                        header = TRUE, sep = ",")
+```
+
+## Data transformation
+
+Three columns were created from timestamp to capture day, time‑of‑day, and hour.
+
+``` {r data_transformation}
+airport_data<- airport_data %>%
+        mutate(hour=hour(timestamp),
+               time= case_when(
+                       hour >= 5  & hour < 11 ~ "morning",
+                       hour >= 11 & hour < 15 ~ "midday",
+                       hour >= 15 & hour < 18 ~ "afternoon",
+                       hour >= 18 & hour < 22 ~ "evening",
+                       TRUE ~ "night"
+               ),
+               day= wday(timestamp,label =TRUE)
+               
+        )
+weather_data$pressure <- as.numeric(weather_data$pressure)
+```
+
+## Elimination
+
+Column "condition" was removed due to inconsistent labeling. For example temperature for the "Fair" condition ranges from 19 to 61, as shown below:
+
+``` {r elimination}
+sort(unique(weather_data$temperature[weather_data$condition=="Fair"]))
+```
+
+## Methodology
+
+Spearman and Kendall were checked informally and showed no major differences, so the main analysis uses Pearson for numeric variables and ANOVA for categorical variables.
+
+```{r methodology}
+#
+get_df<-function(x){if (x %in% names(airport_data)) {
+        airport_data
+} else {
+        weather_data
+}}
+num_vars<-c("dep_delay","distance","departures","arrivals",
+            "hour","temperature","dew_point","humidity",
+            "wind_speed","wind_gust","pressure")
+char_vars<-c("carrier","flight_code","destination",
+             "time","day","wind")
+num_results<- sapply(num_vars,function(x){
+        df <- get_df(x)
+        return(cor(df$taxi_out,df[[x]], method = "pearson")) 
+})
+char_results<-sapply(char_vars,function(x){
+        df <- get_df(x)
+        f<-as.formula(paste("taxi_out ~ ",x))
+        model<-aov(f, data=df)
+        return(etaSquared(model)[1])
+})
+num_results<-data.frame(
+        "variable"= names(num_results), 
+        "r2"= round(num_results^2*100,2),
+        row.names = NULL)
+char_results<-data.frame(
+        "variable" = names(char_results),
+        "r2" = round(char_results*100,2),
+        row.names = NULL
+)
+results<- rbind(char_results,num_results) %>%
+        arrange(desc(r2)) %>%
+        mutate(r2= paste(r2,"%"))
+head(results,10)
+```
+
+## Shared Coverage Check
+
+A Type II ANOVA was used to see how much signal the top variables share with each other.
+
+```{r anovaII}
+model<-lm(taxi_out~destination+carrier+flight_code+departures, data = airport_data)
+overlap<-etaSquared(model, type = 2)
+overlap <- data.frame( variable = row.names(overlap),
+                       r2 = round(overlap[,1] * 100, 2) , 
+                       row.names = NULL ) %>%
+        arrange(desc(r2)) %>% 
+        mutate(r2 = paste0(r2, "%"))
+overlap
+```
+
+## Notes
+
+A full explanation of this phase is available in the [Phase 2](https://github.com/Karyapos/JFK_complete_data_analysis/blob/02-R-correlation/Phase%202%20.md) documentation.
+
