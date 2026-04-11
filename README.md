@@ -3,7 +3,7 @@
 ## Project Summary
 
 This repository documents a complete, end‑to‑end analytical workflow applied to the [JFK Airport dataset](https://www.kaggle.com/datasets/deepankurk/flight-take-off-data-jfk-airport/data).
-Across four phases, [SQL EDA](https://github.com/Karyapos/JFK_complete_data_analysis/tree/01-sql-eda), [R correlation analysis](https://github.com/Karyapos/JFK_complete_data_analysis/tree/02-R-correlation), [Power BI dashboard development](https://github.com/Karyapos/JFK_complete_data_analysis/tree/03-PowerBi-dashboard), and [R modeling](https://github.com/Karyapos/JFK_complete_data_analysis/tree/04-R-Modeling), the project investigates the central question:
+Across four phases, [SQL EDA](https://github.com/Karyapos/JFK_complete_data_analysis/tree/main/01-sql-eda), [R correlation analysis](https://github.com/Karyapos/JFK_complete_data_analysis/tree/main/02-R-correlation), [Power BI dashboard development](https://github.com/Karyapos/JFK_complete_data_analysis/tree/main/03-PowerBi-dashboard), and [R modeling](https://github.com/Karyapos/JFK_complete_data_analysis/tree/main/04-R-Modeling), the project investigates the central question:
 
 **Which factors most strongly influence taxi‑out times, and how?**
 
@@ -62,7 +62,7 @@ Each phase builds on the previous one, moving from raw data to interpretable ins
 
 * No single variable explained **taxi_out** time on its own. The strongest predictor, **departures**, accounted for only **3.62% R²**, confirming a low‑signal dataset
 
-Based on these findings, stakeholders decided to proceed with a focused analysis centered on **wind** and **departures**, as these variables showed the most consistent relationships.
+Based on these findings, stakeholders decided to proceed with a focused analysis centered on **wind** and **departures**, as these variables showed the most consistent relationships. The full reproducible code for this section is available on [RPubs](https://rpubs.com/Karyapos/1420134).
 
 ## Phase 3 — Power BI Dashboard
 
@@ -120,7 +120,7 @@ maxnodes = 500, nodesize = 150, ntree = 500, mtry = 6.
 
 The overall metrics for this specific “top model” were confirmed across 30 replicable splits.
 
-You can access the [R_Markdown](Phase_4.Rmd) file for full reproducibility.
+The full reproducible code for this section is available on [RPubs](https://rpubs.com/Karyapos/1420138).
 
 ## Conclusion
 
