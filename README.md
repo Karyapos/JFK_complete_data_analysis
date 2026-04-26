@@ -7,7 +7,7 @@ Across four phases, [SQL EDA](https://github.com/Karyapos/JFK_complete_data_anal
 
 **Which factors most strongly influence taxi‑out times, and how?**
 
-The answer points consistently to departure traffic: modest in statistical terms (R² ≈ 3.6%), yet operationally meaningful, as "_Very High_" traffic averages **22.8** min vs **17.7** min at "_Very Low_", a 5-minute gap that compounds across hundreds of daily flights.
+Each phase builds on the previous one, moving from raw data to interpretable insights and predictive models.
 
 ## Phase 1 — SQL Exploratory Data Analysis
 
@@ -122,8 +122,14 @@ The overall metrics for this specific “top model” were confirmed across 30 r
 
 The full reproducible code for this section is available on [RPubs](https://rpubs.com/Karyapos/1420138).
 
-## Conclusion
+## Key Findings & Recommendations
+### Departure traffic
+A 5-minute taxi-out gap between the lowest and highest traffic levels can be addressed by spreading departures away from the 7–9 and 18–19 windows, where 38% of flights currently concentrate. De-peaking those two windows would reduce queue pressure more reliably than any other intervention — but since scheduling is airline-driven, the real lever is slot coordination upstream.
+### Wind
+ENE wind raises taxi-out by 2.3 minutes on average, however, it occurs in only 3.9% of flights. The case for a standing operational response is weak. The case for a targeted early-warning protocol when ENE is forecast is strong: rare, predictable, and actionable.
+### What Didn't Move the Needle
+Everything else showed no consistent pattern. Carrier, weekday, weather variables outside of East winds produced no stable or repeatable relationship with taxi-out times across any method applied. Ruling these out consistently reflects the operational discipline already in place at JFK.
 
-This project demonstrates how a structured end-to-end analysis can extract evidence-based insights while minimizing personal bias. Even with a limited and noisy dataset and a low-signal problem space, the analysis consistently shows that **departure traffic** is the only factor with a small but stable and repeatable impact on **taxi_out** performance, from initial exploration through dashboarding to final predictive modeling.
-
-Readers interested in the analytical reasoning are encouraged to follow the logic trail across each phase of the project, where assumptions, reproducibility assets, and supporting visuals are documented step by step.
+## Closing Note
+Even with a limited and noisy dataset and a low-signal problem space, the analysis consistently points to the same answer across every method applied, from initial exploration through dashboarding to final predictive modeling. 
+Readers interested in the analytical reasoning are encouraged to follow the logic trail across each phase, where assumptions, reproducibility assets, and supporting visuals are documented step by step.
