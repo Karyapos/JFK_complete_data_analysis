@@ -7,7 +7,7 @@ Across four phases, [SQL EDA](https://github.com/Karyapos/JFK_complete_data_anal
 
 **Which factors most strongly influence taxi‑out times, and how?**
 
-Each phase builds on the previous one, moving from raw data to interpretable insights and predictive models.
+The answer points consistently to departure traffic: modest in statistical terms (R² ≈ 3.6%), yet operationally meaningful, as "_Very High_" traffic averages **22.8** min vs **17.7** min at "_Very Low_", a 5-minute gap that compounds across hundreds of daily flights.
 
 ## Phase 1 — SQL Exploratory Data Analysis
 
